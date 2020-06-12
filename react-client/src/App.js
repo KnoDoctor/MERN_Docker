@@ -1,9 +1,19 @@
 import React from "react";
-import logo from "./logo.svg";
+import { apiRequest } from "./api/api";
 import "./App.css";
-import Axios from "axios";
 
 export default function App() {
+    //Set Fetch Object
+    const fetchObject = {
+        proxyUrl: "",
+        method: "GET",
+        url: "http://localhost:3001/users",
+    };
+
+    apiRequest(fetchObject).then((users) => {
+        console.log(users);
+    });
+
     return (
         <div>
             <h1>Hello World!</h1>
