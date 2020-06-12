@@ -1,6 +1,7 @@
 import React from "react";
 import { apiRequest } from "./api/api";
 import "./App.css";
+import Axios from "axios";
 
 export default function App() {
     //Set Fetch Object
@@ -18,6 +19,7 @@ export default function App() {
         <div>
             <h1>Hello World!</h1>
             <p>Test of pipeline</p>
+            <p>This is insane!</p>
         </div>
     );
 }
