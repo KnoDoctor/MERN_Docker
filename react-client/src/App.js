@@ -1,26 +1,45 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { apiRequest } from "./api/api";
 import "./App.css";
-import Axios from "axios";
 
 export default function App() {
-    //Set Fetch Object
-    const fetchObject = {
-        proxyUrl: "",
-        method: "GET",
-        url: "http://localhost:3001/users",
-    };
+    const [isLoading, setIsLoading] = useState(true);
+    const [fetchData, setFetchData] = useState({});
 
-    apiRequest(fetchObject).then((users) => {
-        console.log(users);
-    });
+    useEffect(() => {
+        //Set Fetch Object
+        const fetchObject = {
+            proxyUrl: "",
+            method: "GET",
+            url: "http://localhost:3001/users",
+        };
+
+        apiRequest(fetchObject).then((res) => {
+            setFetchData(res);
+            setIsLoading(false);
+        });
+    }, []);
 
     return (
-        <div style={{ maxWidth: "992px", margin: "auto", textAlign: "center" }}>
-            <h1>Hello World!</h1>
-            <p>Test of pipeline</p>
-            <p>This is insane!</p>
-            <h1>OMG!!!!!</h1>
+        <div>
+            {isLoading ? (
+                "loading"
+            ) : (
+                <div
+                    style={{
+                        maxWidth: "992px",
+                        margin: "auto",
+                        textAlign: "center",
+                    }}
+                >
+                    <h1>Hello World!</h1>
+                    <ol className="theList">
+                        {fetchData.users.map(function (user, index) {
+                            return <li key={index}>{user.name}</li>;
+                        })}
+                    </ol>
+                </div>
+            )}
         </div>
     );
 }
