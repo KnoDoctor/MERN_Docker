@@ -20,6 +20,7 @@ export default function App() {
             <h1>Hello World!</h1>
             <p>Test of pipeline</p>
             <p>This is insane!</p>
+            <h1>OMG!!!!!</h1>
         </div>
     );
 }
