@@ -33,7 +33,7 @@ export default function App() {
                     }}
                 >
                     <h1>Hello World!</h1>
-                    <ol className="theList">
+                    <ol className="theList" style={{ textAlign: "left" }}>
                         {fetchData.users.map(function (user, index) {
                             return <li key={index}>{user.name}</li>;
                         })}
