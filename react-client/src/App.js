@@ -16,7 +16,7 @@ export default function App() {
     });
 
     return (
-        <div>
+        <div style={{ maxWidth: "992px", margin: "auto", textAlign: "center" }}>
             <h1>Hello World!</h1>
             <p>Test of pipeline</p>
             <p>This is insane!</p>
