@@ -11,7 +11,7 @@ export default function App() {
         const fetchObject = {
             proxyUrl: "",
             method: "GET",
-            url: "http://localhost:3001/users",
+            url: "http://142.93.144.130:3001/users",
         };
 
         apiRequest(fetchObject).then((res) => {
