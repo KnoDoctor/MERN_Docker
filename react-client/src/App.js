@@ -37,7 +37,7 @@ export default function App() {
                         {fetchData.users.map(function (user, index) {
                             return (
                                 <li key={index}>
-                                    {user.name} - {user._id} - :D
+                                    {user.name} - {user._id}
                                 </li>
                             );
                         })}
