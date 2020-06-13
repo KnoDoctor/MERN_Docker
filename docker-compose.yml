@@ -4,7 +4,7 @@ services:
     client:
         build: ./react-client
         ports:
-            - 80:3000
+            - 3000:3000
         volumes:
             - ./react-client:/usr/src/app
             - node_modules:/usr/src/app/node_modules
