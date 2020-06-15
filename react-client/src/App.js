@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import { apiRequest } from "./api/api";
 import "./App.css";
 
+const DEV_MODE = true;
+
 export default function App() {
     const [isLoading, setIsLoading] = useState(true);
     const [fetchData, setFetchData] = useState({});
-    const [isConsoleLog, setIsConsoleLog] = useState(true);
     const [dbConnection, setDbConnection] = useState("dev");
 
     useEffect(() => {
@@ -68,9 +69,10 @@ export default function App() {
         });
     }
 
-    if (isConsoleLog) {
+    if (DEV_MODE) {
         console.log(dbConnection);
     }
+
     return (
         <div>
             {isLoading ? (
@@ -83,7 +85,7 @@ export default function App() {
                         textAlign: "center",
                     }}
                 >
-                    <h1>Hello World!!!!</h1>
+                    <h1>Hello Andrew!!!!</h1>
                     <ol className="theList" style={{ textAlign: "left" }}>
                         {fetchData.users.map(function (user, index) {
                             return (
@@ -93,14 +95,18 @@ export default function App() {
                             );
                         })}
                     </ol>
-                    <button
-                        onClick={function () {
-                            toggleDb();
-                            refreshData();
-                        }}
-                    >
-                        Current DB: {dbConnection}
-                    </button>
+                    {DEV_MODE ? (
+                        <button
+                            onClick={function () {
+                                toggleDb();
+                                refreshData();
+                            }}
+                        >
+                            Current DB: {dbConnection}
+                        </button>
+                    ) : (
+                        ""
+                    )}
                 </div>
             )}
         </div>
