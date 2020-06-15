@@ -5,14 +5,27 @@ import "./App.css";
 export default function App() {
     const [isLoading, setIsLoading] = useState(true);
     const [fetchData, setFetchData] = useState({});
+    const [isConsoleLog, setIsConsoleLog] = useState(true);
+    const [dbConnection, setDbConnection] = useState("dev");
 
     useEffect(() => {
-        //Set Fetch Object
-        const fetchObject = {
-            proxyUrl: "",
-            method: "GET",
-            url: "http://142.93.144.130:3001/users",
-        };
+        let fetchObject;
+
+        if (dbConnection === "local") {
+            //Set Fetch Object
+            fetchObject = {
+                proxyUrl: "",
+                method: "GET",
+                url: "http://localhost:3001/users",
+            };
+        } else if (dbConnection === "dev") {
+            //Set Dev Fetch Object
+            fetchObject = {
+                proxyUrl: "",
+                method: "GET",
+                url: "http://142.93.144.130:3001/users",
+            };
+        }
 
         apiRequest(fetchObject).then((res) => {
             setFetchData(res);
@@ -20,6 +33,44 @@ export default function App() {
         });
     }, []);
 
+    function toggleDb() {
+        //Toggle DB
+        if (dbConnection === "local") {
+            setDbConnection("dev");
+        } else if (dbConnection === "dev") {
+            setDbConnection("local");
+        }
+    }
+
+    function refreshData() {
+        //Fetch Fresh Data
+        let fetchObject;
+
+        if (dbConnection === "dev") {
+            //Set Fetch Object
+            fetchObject = {
+                proxyUrl: "",
+                method: "GET",
+                url: "http://localhost:3001/users",
+            };
+        } else if (dbConnection === "local") {
+            //Set Dev Fetch Object
+            fetchObject = {
+                proxyUrl: "",
+                method: "GET",
+                url: "http://142.93.144.130:3001/users",
+            };
+        }
+
+        apiRequest(fetchObject).then((res) => {
+            setFetchData(res);
+            setIsLoading(false);
+        });
+    }
+
+    if (isConsoleLog) {
+        console.log(dbConnection);
+    }
     return (
         <div>
             {isLoading ? (
@@ -32,7 +83,7 @@ export default function App() {
                         textAlign: "center",
                     }}
                 >
-                    <h1>Hello World!</h1>
+                    <h1>Hello World!!!!</h1>
                     <ol className="theList" style={{ textAlign: "left" }}>
                         {fetchData.users.map(function (user, index) {
                             return (
@@ -42,6 +93,14 @@ export default function App() {
                             );
                         })}
                     </ol>
+                    <button
+                        onClick={function () {
+                            toggleDb();
+                            refreshData();
+                        }}
+                    >
+                        Current DB: {dbConnection}
+                    </button>
                 </div>
             )}
         </div>
