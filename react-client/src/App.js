@@ -85,7 +85,7 @@ export default function App() {
                         textAlign: "center",
                     }}
                 >
-                    <h1>Hello Andrew!!!!</h1>
+                    <h1>Hello Pavel!!!!</h1>
                     <ol className="theList" style={{ textAlign: "left" }}>
                         {fetchData.users.map(function (user, index) {
                             return (
